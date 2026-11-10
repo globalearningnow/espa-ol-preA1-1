@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pre-A1 · Prepara la Unidad 1 · ¡Hola! Mucho gusto</title>
+<style>
+  :root{
+    --green-dark:#24503F; --green:#3E8466; --green-mid:#4C9A74; --green-pale:#CFE3D6;
+    --mint:#E3F1E8; --bg:#F3F9F5; --text:#1F2A25; --muted:#5E6F66;
+    --ok:#3FA66A; --bad:#C4622D; --white:#FFFFFF; --card-border:#D6EBE0;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:Calibri,"Segoe UI",Arial,sans-serif;font-size:17px;line-height:1.45}
+  .wrap{max-width:860px;margin:0 auto;padding:0 16px 40px}
+  header{background:var(--green-dark);color:var(--white);padding:28px 16px 24px;text-align:center}
+  .eyebrow{display:inline-block;background:var(--green-mid);color:var(--white);font-size:12px;font-weight:700;letter-spacing:.08em;padding:5px 14px;border-radius:20px;text-transform:uppercase}
+  h1{font-family:Cambria,Georgia,serif;font-size:34px;margin:12px 0 6px}
+  .sub{margin:0;opacity:.92}
+  .progress{max-width:860px;margin:18px auto 0;padding:0 16px}
+  .bar{height:10px;background:var(--green-pale);border-radius:6px;overflow:hidden}
+  .bar span{display:block;height:100%;width:0;background:var(--green-mid);transition:width .4s}
+  .ptext{font-size:14px;color:var(--muted);text-align:right;margin-top:4px}
+  .tip{display:flex;gap:10px;align-items:center;background:var(--white);border:1px solid var(--card-border);border-radius:12px;padding:10px 14px;margin-top:16px;font-size:14px;color:var(--muted)}
+  .tip.warn{border-color:var(--bad);color:#7a3418;background:#FBEDE5}
+  .ico{width:22px;height:22px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .task{background:var(--white);border:1px solid var(--card-border);border-radius:16px;padding:22px 20px;margin-top:22px;box-shadow:0 2px 6px rgba(36,80,63,.06)}
+  .task h2{font-family:Cambria,Georgia,serif;color:var(--green-dark);font-size:24px;margin:0 0 6px;display:flex;align-items:center;gap:10px}
+  .num{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--green-dark);color:#fff;font-size:17px;font-family:Calibri,Arial,sans-serif;font-weight:700;flex-shrink:0}
+  .tag{display:inline-block;background:var(--mint);color:var(--green-dark);font-size:13px;font-weight:700;padding:3px 12px;border-radius:14px;margin-bottom:10px}
+  .inst{margin:4px 0 2px;font-weight:600;display:flex;align-items:center;gap:8px;color:var(--text)}
+  .inst .ico{color:var(--green)}
+  .en{margin:0 0 14px;font-size:14px;color:var(--muted);font-style:italic}
+  .play{border:none;background:var(--green);color:#fff;border-radius:24px;padding:8px 16px;font-size:15px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+  .play .ico{width:18px;height:18px}
+  .play:hover{background:var(--green-dark)}
+  .row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:12px 0;border-top:1px dashed var(--card-border)}
+  .row:first-of-type{border-top:none}
+  .rlabel{font-weight:700;color:var(--green-dark);min-width:24px}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{border:2px solid var(--green-pale);background:var(--white);border-radius:12px;padding:6px 12px;font-size:16px;cursor:pointer;min-width:58px;text-align:center;color:var(--text)}
+  .opt:hover{border-color:var(--green-mid)}
+  .opt.sel{border-color:var(--green-dark);background:var(--mint);font-weight:700}
+  .scene{display:flex;flex-direction:column;align-items:center;line-height:1.1;padding:7px 10px;color:var(--green-dark)}
+  .scene .pair{display:flex;gap:4px}
+  .scene .pair .ico{width:24px;height:24px}
+  .scene .t{font-size:13px;color:var(--muted);margin-top:4px}
+  .scene.night{background:var(--green-dark);color:#F3E3B0}
+  .scene.night .t{color:#CFE3D6}
+  .opt.scene.night.sel{background:#1a3b2e;border-color:var(--green-mid)}
+  .letter{font-family:Cambria,Georgia,serif;font-size:24px;font-weight:700;min-width:52px}
+  .mark{font-weight:700;font-size:20px;min-width:24px}
+  .row.ok .mark{color:var(--ok)} .row.bad .mark{color:var(--bad)}
+  .row.ok .opt.sel{border-color:var(--ok);box-shadow:0 0 0 2px var(--ok)}
+  .row.bad .opt.sel{border-color:var(--bad);box-shadow:0 0 0 2px var(--bad)}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:6px}
+  .legend .scene{border:1px solid var(--card-border);border-radius:12px;background:var(--bg)}
+  .legend .scene.night{background:var(--green-dark)}
+  /* Tarea 3 */
+  .slots{display:flex;gap:6px;min-height:46px}
+  .slot{width:42px;height:46px;border:2px dashed var(--green-pale);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:Cambria,Georgia,serif;font-size:22px;font-weight:700;cursor:pointer;background:var(--white)}
+  .slot.full{border-style:solid;border-color:var(--green-mid);background:var(--mint)}
+  .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .chip{border:none;background:var(--green-dark);color:#fff;border-radius:10px;width:40px;height:40px;font-family:Cambria,Georgia,serif;font-size:20px;font-weight:700;cursor:pointer}
+  .chip:disabled{opacity:.25;cursor:default}
+  .row.ok .slot.full{border-color:var(--ok);background:#E5F4EA}
+  .row.bad .slot.full{border-color:var(--bad);background:#FBEDE5}
+  .sentence{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+  .stext{font-size:19px;font-weight:600;color:var(--text)}
+  .avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff}
+  .avatar .ico{width:24px;height:24px}
+  /* Tarea 4 */
+  .scenebox{display:flex;align-items:center;gap:12px;background:var(--mint);border-radius:12px;padding:10px 14px;margin-bottom:12px;font-size:15px;color:var(--green-dark)}
+  .scenebox .ico{width:28px;height:28px}
+  .bank{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 14px;padding:10px;border:1px solid var(--card-border);border-radius:12px;background:var(--bg)}
+  .bank .wchip{border:2px solid var(--green-mid);background:#fff;color:var(--green-dark);border-radius:20px;padding:6px 14px;font-size:16px;font-weight:700;cursor:pointer}
+  .bank .wchip:disabled{opacity:.3;cursor:default}
+  .line{display:flex;gap:10px;align-items:flex-start;padding:7px 0}
+  .who{flex-shrink:0;width:34px;height:34px;border-radius:50%;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .who.c{background:var(--green-mid)} .who.t{background:#7A8F84}
+  .bubble{background:var(--bg);border:1px solid var(--card-border);border-radius:14px;padding:8px 12px}
+  .gap{display:inline-block;min-width:120px;border-bottom:2px solid var(--green-mid);padding:0 6px;cursor:pointer;color:var(--green-dark);font-weight:700;text-align:center}
+  .gap.active{background:#FFF6D6}
+  .gap.empty::after{content:"……"}
+  .gap.ok{border-color:var(--ok);background:#E5F4EA}
+  .gap.bad{border-color:var(--bad);background:#FBEDE5}
+  .voicepick{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:10px;font-size:13px;color:var(--muted)}
+  .voicepick label{display:flex;align-items:center;gap:6px}
+  .voicepick .who{width:24px;height:24px;font-size:12px}
+  .voicepick select{font:inherit;color:var(--text);border:1px solid var(--card-border);border-radius:8px;padding:3px 6px;background:#fff;max-width:210px}
+  .line.speaking .bubble{border-color:var(--green-mid);box-shadow:0 0 0 2px var(--green-pale);background:#fff}
+  .line.speaking .who{transform:scale(1.12)}
+  .who{transition:transform .2s}
+  .actions{display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap}
+  .check{border:none;background:var(--green-dark);color:#fff;border-radius:10px;padding:10px 22px;font-size:16px;font-weight:700;cursor:pointer}
+  .check:hover{background:var(--green)}
+  .score{font-weight:700;color:var(--green-dark)}
+  .final{background:var(--green-dark);color:#fff;border-radius:16px;padding:22px;margin-top:26px;text-align:center}
+  .final .big{font-family:Cambria,Georgia,serif;font-size:30px;margin:6px 0}
+  .final button{background:#fff;color:var(--green-dark);border:none;border-radius:10px;padding:9px 20px;font-weight:700;font-size:15px;cursor:pointer;margin-top:8px}
+  footer{text-align:center;color:var(--muted);margin-top:26px;font-family:Cambria,Georgia,serif;font-size:18px}
+  @media (max-width:560px){h1{font-size:27px}.gap{min-width:90px}}
+</style>
+</head>
+<body>
+<!-- Iconos (línea fina, color de la marca) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-sunrise" viewBox="0 0 24 24"><path d="M3 18h18M7 18a5 5 0 0 1 10 0M12 4v3M4.9 9.9l2 2M19.1 9.9l-2 2M2 14h2M20 14h2"/></symbol>
+    <symbol id="i-cup" viewBox="0 0 24 24"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9zM16 10h1.5a2.5 2.5 0 0 1 0 5H16M8 3v3M12 3v3"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M5 21V4h10v17M15 9h4v12M3 21h18M8 8h1M11 8h1M8 12h1M11 12h1M8 16h1M11 16h1"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.8z"/></symbol>
+    <symbol id="i-suitcase" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="12" rx="2"/><path d="M9 7V4h6v3M9 11v4M15 11v4"/></symbol>
+    <symbol id="i-exit" viewBox="0 0 24 24"><path d="M14 4h5v16h-5M10 8l-4 4 4 4M6 12h10"/></symbol>
+    <symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 15v-3a8 8 0 0 1 16 0v3M4 15h3v5H5a1 1 0 0 1-1-1v-4zM20 15h-3v5h2a1 1 0 0 0 1-1v-4z"/></symbol>
+    <symbol id="i-speaker" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4zM16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></symbol>
+  </defs>
+</svg>
+
+<header>
+  <span class="eyebrow">Pre-A1 · Español · Prepara la Unidad 1</span>
+  <h1>¡Hola! Mucho gusto</h1>
+  <p class="sub">Saludos, el alfabeto y frases para presentarte.</p>
+</header>
+<div class="progress"><div class="bar"><span id="bar"></span></div><div class="ptext" id="ptext">0 / 23</div></div>
+
+<div class="wrap">
+  <div class="tip" id="tip"><svg class="ico"><use href="#i-info"/></svg><span>Para escuchar el audio con la voz más natural, abre esta página en <b>Microsoft Edge</b> o <b>Google Chrome</b>.</span></div>
+
+  <!-- TAREA 1 -->
+  <section class="task" id="t1">
+    <h2><span class="num">1</span>¿Qué hora es?</h2>
+    <span class="tag">Vocabulario: saludos y despedidas</span>
+    <p class="inst"><svg class="ico"><use href="#i-headphones"/></svg>Escucha y toca la imagen correcta.</p>
+    <p class="en">Listen and tap the right picture: morning, afternoon, night or leaving.</p>
+    <div class="legend" id="legend"></div>
+    <div id="t1rows"></div>
+    <div class="actions"><button class="check" data-task="1">Comprobar</button><span class="score" id="s1"></span></div>
+  </section>
+
+  <!-- TAREA 2 -->
+  <section class="task" id="t2">
+    <h2><span class="num">2</span>¿Qué letra es?</h2>
+    <span class="tag">Vocabulario: el alfabeto</span>
+    <p class="inst"><svg class="ico"><use href="#i-headphones"/></svg>Escucha el nombre de la letra y tócala.</p>
+    <p class="en">Listen to the name of the letter and tap it.</p>
+    <div id="t2rows"></div>
+    <div class="actions"><button class="check" data-task="2">Comprobar</button><span class="score" id="s2"></span></div>
+  </section>
+
+  <!-- TAREA 3 -->
+  <section class="task" id="t3">
+    <h2><span class="num">3</span>¿Cómo se escribe?</h2>
+    <span class="tag">Deletrear nombres</span>
+    <p class="inst"><svg class="ico"><use href="#i-headphones"/></svg>Escucha y completa la frase: toca las letras en orden.</p>
+    <p class="en">Listen to the spelling and complete the sentence: tap the letters in order. Tap a letter in the boxes to remove it.</p>
+    <div id="t3rows"></div>
+    <div class="actions"><button class="check" data-task="3">Comprobar</button><span class="score" id="s3"></span></div>
+  </section>
+
+  <!-- TAREA 4 -->
+  <section class="task" id="t4">
+    <h2><span class="num">4</span>Nuevos vecinos</h2>
+    <span class="tag">Frases para presentarse</span>
+    <p class="inst"><svg class="ico"><use href="#i-headphones"/></svg>Escucha la conversación y completa con las frases del banco.</p>
+    <p class="en">Listen and complete the conversation. Tap a gap, then tap a phrase. Two phrases are extra.</p>
+    <div class="scenebox"><svg class="ico"><use href="#i-building"/></svg><svg class="ico"><use href="#i-clock"/></svg><span>Son las 10:00. Carmen y Tom se encuentran en la puerta del edificio.</span></div>
+    <button class="play" id="dlgPlay" data-label="Escuchar la conversación"><svg class="ico"><use href="#i-speaker"/></svg>Escuchar la conversación</button>
+    <div class="voicepick" id="voicePick" style="display:none">
+      <label><span class="who c">C</span>Voz de Carmen <select id="selF"></select></label>
+      <label><span class="who t">T</span>Voz de Tom <select id="selM"></select></label>
+    </div>
+    <div class="bank" id="bank"></div>
+    <div id="dialogue"></div>
+    <div class="actions"><button class="check" data-task="4">Comprobar</button><span class="score" id="s4"></span></div>
+  </section>
+
+  <div class="final">
+    <div>Tu puntuación total</div>
+    <div class="big" id="total">0 / 23</div>
+    <div id="msg">Haz las cuatro tareas y pulsa «Comprobar».</div>
+    <button id="reset">Empezar otra vez</button>
+  </div>
+
+  <footer>¡Nos vemos en clase! — Fernanda.</footer>
+</div>
+
+<script>
+(function(){
+  const icon = (id) => '<svg class="ico"><use href="#'+id+'"/></svg>';
+
+  /* ---------- VOZ: elige la voz española más natural del dispositivo ---------- */
+  const synth = window.speechSynthesis;
+  let vF = null, vM = null, fakeMale = false;
+  const FEMALE = /\b(elvira|luc[ií]a|helena|laura|m[oó]nica|paulina|marisol|abril|esperanza|ximena|triana|irene|estrella|dalia|elena|sof[ií]a|camila|catalina|salom[eé]|valentina|beatriz|candela|carlota|nuria|larissa|lola|marta|mar[ií]a|renata|yolanda|karina|andrea|tania|nora|carla|google español|female|mujer)\b/i;
+  const MALE = /\b([aá]lvaro|jorge|pablo|diego|ra[uú]l|enrique|arnau|dar[ií]o|tom[aá]s|juan|carlos|gonzalo|manuel|alonso|andr[eé]s|gerardo|lorenzo|cristian|federico|emilio|sa[uú]l|el[ií]as|alex|mateo|pedro|rodrigo|roberto|javier|luis|marcelo|mario|sergio|v[ií]ctor|yago|rafael|jos[eé]|nil|teo|luciano|alberto|francisco|miguel|antonio|male|hombre)\b/i;
+  function quality(v){
+    let q = 0;
+    if(/natural|neural|online/i.test(v.name)) q += 100;
+    if(/premium|enhanced|mejorada/i.test(v.name)) q += 80;
+    if(/google/i.test(v.name)) q += 60;
+    if(/^es[-_]ES/i.test(v.lang)) q += 30;
+    if(!v.localService) q += 5;
+    return q;
+  }
+  const short = (v) => v.name.replace(/^(Microsoft|Apple)\s*/,'').replace(/\s*Online \(Natural\)/,' (natural)').replace(/\s*-\s*Spanish.*$/,'') + ' · ' + v.lang;
+  function getStored(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function setStored(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  let ES = [];
+  function fillSelect(id, es, def, who){
+    ES = es;
+    const sel = document.getElementById(id); if(!sel) return;
+    const saved = getStored('voz_'+who);
+    sel.innerHTML = '';
+    es.forEach((v,i)=>{ const o=document.createElement('option'); o.value=i; o.textContent=short(v); sel.appendChild(o); });
+    let idx = es.findIndex(v => v.name === saved);
+    if(idx < 0) idx = es.indexOf(def);
+    if(idx >= 0) sel.value = idx;
+    if(who==='F' && idx>=0) vF = es[idx];
+    if(who==='M' && idx>=0){ vM = es[idx]; fakeMale = !MALE.test(vM.name); }
+    sel.onchange = () => { const v = ES[+sel.value]; if(who==='F') vF = v; else { vM = v; fakeMale = false; } setStored('voz_'+who, v.name); };
+  }
+  function loadVoices(){
+    if(!synth) return;
+    const es = synth.getVoices().filter(v => /^es/i.test(v.lang)).sort((a,b)=>quality(b)-quality(a));
+    const mal = es.filter(v => MALE.test(v.name) && !/female/i.test(v.name));
+    let fem = es.filter(v => FEMALE.test(v.name) && !mal.includes(v));
+    if(!fem.length) fem = es.filter(v => !mal.includes(v));
+    vF = fem[0] || es[0] || null;
+    vM = mal[0] || vF;
+    fakeMale = !mal.length; // sin voz masculina: se baja un poco el tono como último recurso
+    const vp = document.getElementById('voicePick'); if(vp) vp.style.display = es.length ? 'flex' : 'none';
+    fillSelect('selF', es, vF, 'F');
+    fillSelect('selM', es, vM, 'M');
+    if(synth.getVoices().length && !es.length){
+      const t = document.getElementById('tip'); t.classList.add('warn');
+      t.querySelector('span').innerHTML = 'Tu navegador no tiene voz en español. Abre esta página en <b>Microsoft Edge</b> o <b>Google Chrome</b> para escuchar el audio.';
+    }
+  }
+  if(!synth){ const t=document.getElementById('tip'); t.classList.add('warn'); }
+  else { loadVoices(); synth.onvoiceschanged = loadVoices; }
+
+  // Reproducir / pausar / seguir con el mismo botón
+  let curBtn = null, token = 0;
+  function setBtn(b, state){
+    if(!b) return;
+    b.dataset.state = state;
+    b.innerHTML = (state==='playing' ? icon('i-pause')+'Pausa' : state==='paused' ? icon('i-play')+'Seguir' : icon('i-speaker')+b.dataset.label);
+  }
+  let st = null; // estado de la reproducción actual
+  function clearHL(){ document.querySelectorAll('.line.speaking').forEach(x=>x.classList.remove('speaking')); }
+  function finish(my){ if(my !== token) return; clearHL(); setBtn(curBtn,'idle'); curBtn = null; st = null; }
+  function next(my){
+    if(!st || my !== token) return;
+    if(st.idx >= st.lines.length){ finish(my); return; }
+    const l = st.lines[st.idx];
+    const u = new SpeechSynthesisUtterance(l.t);
+    u.rate = l.r || 0.92; u.pitch = 1;
+    const v = l.v === 'M' ? vM : vF;
+    if(v){ u.voice = v; u.lang = v.lang; } else { u.lang = 'es-ES'; }
+    if(l.v === 'M' && fakeMale) u.pitch = 0.8;
+    clearHL(); if(l.hl) l.hl.classList.add('speaking');
+    u.onend = () => {
+      if(!st || my !== token) return;
+      st.idx++;
+      if(st.paused) return;
+      st.timer = setTimeout(()=>next(my), st.lines.length > 1 ? 450 : 0);
+    };
+    synth.speak(u);
+  }
+  function say(lines, btn){ // lines: [{t:'texto', v:'F'|'M', r, hl}]
+    if(!synth) return;
+    if(btn && btn === curBtn && st){
+      if(btn.dataset.state === 'playing'){
+        st.paused = true; clearTimeout(st.timer);
+        if(synth.speaking) synth.pause();
+        setBtn(btn,'paused'); return;
+      }
+      if(btn.dataset.state === 'paused'){
+        st.paused = false; setBtn(btn,'playing');
+        if(synth.paused) synth.resume(); else next(token);
+        return;
+      }
+    }
+    synth.cancel(); if(st) clearTimeout(st.timer); clearHL();
+    setBtn(curBtn,'idle');
+    const my = ++token; curBtn = btn || null; setBtn(curBtn,'playing');
+    st = {lines, idx:0, paused:false, timer:null};
+    next(my);
+  }
+
+  function shuffle(a){ a = a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+  const el = (tag, cls, txt) => { const e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e; };
+  const playBtn = (label) => { const b = el('button','play'); b.dataset.label = label; setBtn(b,'idle'); return b; };
+
+  const scores = {1:0,2:0,3:0,4:0};
+  const TOTAL = 23;
+  function updateTotal(){
+    const s = scores[1]+scores[2]+scores[3]+scores[4];
+    document.getElementById('total').textContent = s+' / '+TOTAL;
+    document.getElementById('ptext').textContent = s+' / '+TOTAL;
+    document.getElementById('bar').style.width = (s/TOTAL*100)+'%';
+    document.getElementById('msg').textContent =
+      s===TOTAL ? '¡Perfecto! Ya estás preparado/a para la Unidad 1.' :
+      s>=17 ? '¡Muy bien! Repasa los errores y vuelve a comprobar.' :
+      s>0 ? '¡Buen comienzo! Escucha otra vez y repite las tareas.' : 'Haz las cuatro tareas y pulsa «Comprobar».';
+  }
+
+  /* ---------- TAREA 1: saludos ---------- */
+  const SCENES = [
+    {k:'m', i:['i-sunrise','i-cup'], t:'08:00'},
+    {k:'t', i:['i-sun','i-building'], t:'17:00'},
+    {k:'n', i:['i-moon','i-star'], t:'22:30', night:true},
+    {k:'d', i:['i-suitcase','i-exit'], t:'salida'}
+  ];
+  function sceneHTML(s){ return '<span class="pair">'+s.i.map(icon).join('')+'</span><span class="t">'+s.t+'</span>'; }
+  const legend = document.getElementById('legend');
+  SCENES.forEach(s=>{ const d = el('div','scene'+(s.night?' night':'')); d.innerHTML = sceneHTML(s); legend.appendChild(d); });
+
+  const T1 = [
+    {a:'¡Buenas noches!', v:'M', k:'n'},
+    {a:'¡Buenos días!', v:'F', k:'m'},
+    {a:'¡Hasta luego!', v:'M', k:'d'},
+    {a:'¡Buenas tardes, Lucía!', v:'M', k:'t'},
+    {a:'¡Adiós!', v:'F', k:'d'},
+    {a:'¡Buenos días, señor García!', v:'F', k:'m'}
+  ];
+  const t1rows = document.getElementById('t1rows');
+  T1.forEach((it,i)=>{
+    const r = el('div','row'); r.dataset.ans = it.k;
+    r.appendChild(el('span','rlabel',(i+1)+'.'));
+    const b = playBtn('Escucha'); b.addEventListener('click',()=>say([{t:it.a, v:it.v}], b)); r.appendChild(b);
+    const o = el('div','opts');
+    SCENES.forEach(s=>{
+      const btn = el('button','opt scene'+(s.night?' night':'')); btn.dataset.v = s.k; btn.innerHTML = sceneHTML(s);
+      btn.addEventListener('click',()=>{ o.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel')); btn.classList.add('sel'); r.classList.remove('ok','bad'); });
+      o.appendChild(btn);
+    });
+    r.appendChild(o); r.appendChild(el('span','mark'));
+    t1rows.appendChild(r);
+  });
+
+  /* ---------- TAREA 2: letras ---------- */
+  const T2 = [
+    {say:'hache', a:'H', o:['H','J','G','A']},
+    {say:'jota', a:'J', o:['J','G','H','I']},
+    {say:'eñe', a:'Ñ', o:['Ñ','N','E','M']},
+    {say:'ge', a:'G', o:['G','J','Q','H']},
+    {say:'uve', a:'V', o:['V','B','U','W']},
+    {say:'i griega', a:'Y', o:['Y','I','E','G']},
+    {say:'erre', a:'R', o:['R','E','L','A']},
+    {say:'zeta', a:'Z', o:['Z','S','C','X']}
+  ];
+  const t2rows = document.getElementById('t2rows');
+  shuffle(T2).forEach((it,i)=>{
+    const r = el('div','row'); r.dataset.ans = it.a;
+    r.appendChild(el('span','rlabel',(i+1)+'.'));
+    const b = playBtn('Escucha'); b.addEventListener('click',()=>say([{t:it.say, v:'F'}], b)); r.appendChild(b);
+    const o = el('div','opts');
+    shuffle(it.o).forEach(L=>{
+      const btn = el('button','opt letter',L); btn.dataset.v = L;
+      btn.addEventListener('click',()=>{ o.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel')); btn.classList.add('sel'); r.classList.remove('ok','bad'); });
+      o.appendChild(btn);
+    });
+    r.appendChild(o); r.appendChild(el('span','mark'));
+    t2rows.appendChild(r);
+  });
+
+  /* ---------- TAREA 3: deletrear ---------- */
+  const T3 = [
+    {name:'HUGO', v:'M', c:'#3E8466', intro:'Me llamo', spoken:'Hugo', spell:'hache... u... ge... o.', extra:['J','E']},
+    {name:'JULIA', v:'F', c:'#4C9A74', intro:'Me llamo', spoken:'Julia', spell:'jota... u... ele... i... a.', extra:['H','E']},
+    {name:'PEÑA', v:'M', c:'#24503F', intro:'Mi apellido es', spoken:'Peña', spell:'pe... e... eñe... a.', extra:['N','B']},
+    {name:'VERA', v:'F', c:'#7A8F84', intro:'Me llamo', spoken:'Vera', spell:'uve... e... erre... a.', extra:['B','I']}
+  ];
+  const t3rows = document.getElementById('t3rows');
+  T3.forEach((it,i)=>{
+    const r = el('div','row'); r.dataset.ans = it.name;
+    r.appendChild(el('span','rlabel',(i+1)+'.'));
+    const av = el('span','avatar'); av.style.background = it.c; av.innerHTML = icon('i-person'); r.appendChild(av);
+    const b = playBtn('Escucha'); b.addEventListener('click',()=>say([{t:it.intro+' '+it.spoken+'. Se escribe:', v:it.v},{t:it.spell, v:it.v}], b)); r.appendChild(b);
+    const box = el('div'); box.style.display='flex'; box.style.flexDirection='column'; box.style.gap='8px';
+    const slots = el('div','slots');
+    for(let k=0;k<it.name.length;k++){
+      const s = el('div','slot');
+      s.addEventListener('click',()=>{
+        if(!s.textContent) return;
+        s._chip.disabled = false; s.textContent=''; s._chip=null; s.classList.remove('full'); r.classList.remove('ok','bad');
+      });
+      slots.appendChild(s);
+    }
+    const chips = el('div','chips');
+    shuffle(it.name.split('').concat(it.extra)).forEach(L=>{
+      const c = el('button','chip',L);
+      c.addEventListener('click',()=>{
+        const empty = Array.from(slots.children).find(s=>!s.textContent);
+        if(!empty) return;
+        empty.textContent = L; empty._chip = c; empty.classList.add('full'); c.disabled = true; r.classList.remove('ok','bad');
+      });
+      chips.appendChild(c);
+    });
+    const sent = el('div','sentence'); sent.appendChild(el('span','stext',it.intro)); sent.appendChild(slots); sent.appendChild(el('span','stext','.'));
+    box.appendChild(sent); box.appendChild(chips);
+    r.appendChild(box); r.appendChild(el('span','mark'));
+    t3rows.appendChild(r);
+  });
+
+  /* ---------- TAREA 4: diálogo ---------- */
+  const PHRASES = ['¡Buenos días!','Me llamo','Mucho gusto.','Igualmente.','¡Hasta luego!'];
+  const DECOYS = ['¡Buenas noches!','¿Cómo te llamas?'];
+  const DLG = [
+    {w:'C', parts:[{g:0}]},
+    {w:'T', parts:['¡Hola! ',{g:1},' Tom.']},
+    {w:'C', parts:['Hola, Tom. Yo soy Carmen. ',{g:2}]},
+    {w:'T', parts:[{g:3},' ¿Cómo se escribe «Carmen»?']},
+    {w:'C', parts:['Ce, a, erre, eme, e, ene.']},
+    {w:'T', parts:['¡Gracias, Carmen! ',{g:4}]},
+    {w:'C', parts:['¡Hasta luego, Tom!']}
+  ];
+  const AUDIO = [
+    {r:1, v:'F', t:'¡Buenos días!'},
+    {r:1, v:'M', t:'¡Hola! Me llamo Tom.'},
+    {r:1, v:'F', t:'Hola, Tom. Yo soy Carmen. Mucho gusto.'},
+    {r:1, v:'M', t:'Igualmente. ¿Cómo se escribe Carmen?'},
+    {r:1, v:'F', t:'Ce, a, erre, eme, e, ene.'},
+    {r:1, v:'M', t:'¡Gracias, Carmen! ¡Hasta luego!'},
+    {r:1, v:'F', t:'¡Hasta luego, Tom!'}
+  ];
+  const dlgBtn = document.getElementById('dlgPlay'); dlgBtn.addEventListener('click',()=>say(AUDIO.map((a,i)=>Object.assign({}, a, {hl: lineEls[i]})), dlgBtn));
+
+  const dlg = document.getElementById('dialogue');
+  const gaps = [];
+  let activeGap = null;
+  function setActive(g){ gaps.forEach(x=>x.classList.remove('active')); activeGap = g; if(g) g.classList.add('active'); }
+  const lineEls = [];
+  DLG.forEach(line=>{
+    const l = el('div','line'); lineEls.push(l);
+    l.appendChild(el('span','who '+(line.w==='C'?'c':'t'), line.w));
+    const bub = el('div','bubble');
+    line.parts.forEach(p=>{
+      if(typeof p === 'string'){ bub.appendChild(document.createTextNode(p)); }
+      else{
+        const g = el('span','gap empty'); g._chip = null;
+        g.addEventListener('click',()=>{
+          if(g._chip){ g._chip.disabled=false; g._chip=null; g.textContent=''; g.classList.add('empty'); }
+          g.classList.remove('ok','bad'); setActive(g);
+        });
+        gaps[p.g] = g; bub.appendChild(g);
+      }
+    });
+    l.appendChild(bub); dlg.appendChild(l);
+  });
+  setActive(gaps[0]);
+  const bank = document.getElementById('bank');
+  shuffle(PHRASES.concat(DECOYS)).forEach(ph=>{
+    const c = el('button','wchip',ph);
+    c.addEventListener('click',()=>{
+      let g = (activeGap && !activeGap._chip) ? activeGap : gaps.find(x=>!x._chip);
+      if(!g) return;
+      g.textContent = ph; g._chip = c; g.classList.remove('empty','ok','bad'); c.disabled = true;
+      setActive(gaps.find(x=>!x._chip) || null);
+    });
+    bank.appendChild(c);
+  });
+
+  /* ---------- COMPROBAR ---------- */
+  function checkRows(container){
+    let n=0;
+    container.querySelectorAll('.row').forEach(r=>{
+      const sel = r.querySelector('.opt.sel');
+      const ok = sel && sel.dataset.v === r.dataset.ans;
+      r.classList.remove('ok','bad'); r.classList.add(ok?'ok':'bad');
+      r.querySelector('.mark').textContent = ok?'✓':'✗';
+      if(ok) n++;
+    });
+    return n;
+  }
+  document.querySelectorAll('.check').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const t = btn.dataset.task; let n=0, max=0;
+      if(t==='1'){ n=checkRows(t1rows); max=6; }
+      if(t==='2'){ n=checkRows(t2rows); max=8; }
+      if(t==='3'){
+        max=4;
+        t3rows.querySelectorAll('.row').forEach(r=>{
+          const word = Array.from(r.querySelectorAll('.slot')).map(s=>s.textContent).join('');
+          const ok = word === r.dataset.ans;
+          r.classList.remove('ok','bad'); r.classList.add(ok?'ok':'bad');
+          r.querySelector('.mark').textContent = ok?'✓':'✗';
+          if(ok) n++;
+        });
+      }
+      if(t==='4'){
+        max=5;
+        gaps.forEach((g,i)=>{
+          const ok = g._chip && g.textContent === PHRASES[i];
+          g.classList.remove('ok','bad'); g.classList.add(ok?'ok':'bad');
+          if(ok) n++;
+        });
+      }
+      scores[t]=n;
+      document.getElementById('s'+t).textContent = n+' / '+max;
+      updateTotal();
+    });
+  });
+  document.getElementById('reset').addEventListener('click',()=>location.reload());
+})();
+</script>
+</body>
+</html>
